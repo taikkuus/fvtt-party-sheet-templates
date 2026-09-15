@@ -1,0 +1,144 @@
+{
+  "name": "Shadowdark",
+  "system": "shadowdark",
+  "author": "taikkuus",
+  "version": "1.0.0",
+  "minimumSystemVersion": "4.0.0",
+  "offline_excludes_property": "type",
+  "offline_excludes": [
+    "NPC",
+    "Light"
+  ],
+  "rows": [
+    [
+      {
+        "name": "Character Sheet",
+        "type": "charactersheet",
+        "header": "hide",
+        "text": ""
+      },
+      {
+        "name": "Name",
+        "type": "direct",
+        "header": "show",
+        "text": "{name}"
+      },
+      {
+        "name": "STR",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.abilities.str.value} ({system.abilities.str.mod})"
+      },
+      {
+        "name": "DEX",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.abilities.dex.value} ({system.abilities.dex.mod})"
+      },
+      {
+        "name": "CON",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.abilities.con.value} ({system.abilities.con.mod})"
+      },
+      {
+        "name": "AC",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.attributes.ac.value} {fa-solid fa-shield}"
+      },
+      {
+        "name": "Alignment",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.alignment}"
+      },
+      {
+        "name": "HP",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.attributes.hp.value}/{system.attributes.hp.max} {fa fa-heart}"
+      }
+    ],
+    [
+      {
+        "name": "Level",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.level}"
+      },
+      {
+        "name": "Class",
+        "type": "uuid-link",
+        "header": "show",
+        "text": "system.class => {name}"
+      },
+      {
+        "name": "INT",
+        "type": "direct",
+        "header": "show",
+        "showSign": true,
+        "text": "{system.abilities.int.value} ({system.abilities.int.mod})"
+      },
+      {
+        "name": "WIS",
+        "type": "direct",
+        "header": "show",
+        "showSign": true,
+        "text": "{system.abilities.wis.value} ({system.abilities.wis.mod})"
+      },
+      {
+        "name": "CHA",
+        "type": "direct",
+        "header": "show",
+        "showSign": true,
+        "text": "{system.abilities.cha.value} ({system.abilities.cha.mod})"
+      },
+      {
+        "name": "Coins",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.coins.gp}gp {system.coins.sp}sp {system.coins.cp}cp"
+      },
+      {
+        "name": "Has Luck",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.luck.available}"
+      },
+      {
+        "name": "Renown",
+        "type": "direct",
+        "header": "show",
+        "text": "{system.renown}"
+      }
+    ],
+    [
+      {
+        "name": "Ancestry",
+        "type": "uuid-link",
+        "header": "show",
+        "text": "system.ancestry => {name}"
+      },
+      {
+        "name": "Background",
+        "type": "uuid-link",
+        "header": "show",
+        "text": "system.background => {name}"
+      },
+      {
+        "name": "Deity",
+        "type": "uuid-link",
+        "header": "show",
+        "text": "system.deity => {name}"
+      },
+      {
+        "name": "Languages",
+        "type": "uuid-link",
+        "header": "show",
+        "colspan": 5,
+        "text": "system.languages => {name},"
+      }
+    ]
+  ]
+}

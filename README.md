@@ -1,25 +1,37 @@
 # Template System JSON Documentation
 
 ## Table of Contents
-1. [Overview & Installation](#overview--installation)
-2. [Template Structure](#template-structure)
-   - [Required Properties](#required-properties)
-   - [Optional Properties](#optional-properties)
-3. [Row and Column Configuration](#row-and-column-configuration)
-   - [Column Types](#column-types)
-   - [Column Properties](#column-properties)
-4. [Special Keywords & Text Processing](#special-keywords--text-processing)
-   - [Property References](#property-references)
-   - [Mathematical Operations](#mathematical-operations)
-   - [Formatting Tags](#formatting-tags)
-   - [UI Elements](#ui-elements)
-5. [Advanced Features](#advanced-features)
-   - [Direct-Complex Conditions](#direct-complex-conditions)
-   - [Array Processing](#array-processing)
-   - [Object Loops](#object-loops)
-   - [Table Layout Control](#table-layout-control)
-6. [Examples](#examples)
-7. [Troubleshooting & Tips](#troubleshooting--tips)
+- [Template System JSON Documentation](#template-system-json-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Overview \& Installation](#overview--installation)
+    - [Installation Locations:](#installation-locations)
+  - [Template Structure](#template-structure)
+    - [Required Properties](#required-properties)
+    - [Optional Properties](#optional-properties)
+  - [Row and Column Configuration](#row-and-column-configuration)
+    - [Row Structure](#row-structure)
+    - [Column Types](#column-types)
+    - [Column Properties](#column-properties)
+  - [Special Keywords \& Text Processing](#special-keywords--text-processing)
+    - [Property References](#property-references)
+    - [Text Value Types](#text-value-types)
+    - [Mathematical Operations](#mathematical-operations)
+    - [Formatting Tags](#formatting-tags)
+    - [UI Elements](#ui-elements)
+  - [Advanced Features](#advanced-features)
+    - [Direct-Complex Conditions](#direct-complex-conditions)
+    - [Array Processing](#array-processing)
+    - [Object Loops](#object-loops)
+    - [UUID Link](#uuid-link)
+    - [Table Layout Control](#table-layout-control)
+  - [Examples](#examples)
+    - [Basic Template](#basic-template)
+    - [Advanced Template with Conditions](#advanced-template-with-conditions)
+  - [Troubleshooting \& Tips](#troubleshooting--tips)
+    - [Development Best Practices](#development-best-practices)
+    - [Common Issues](#common-issues)
+    - [Platform-Specific Notes](#platform-specific-notes)
+    - [Starter Templates](#starter-templates)
 
 ## Overview & Installation
 
@@ -139,6 +151,7 @@ Each column requires these basic properties:
 - **largest-from-array** / **smallest-from-array** - Returns largest/smallest numeric value from array
 - **charactersheet** - Displays clickable character sheet icon
 - **span** - Placeholder for rowspan cells (see Table Layout section)
+- **uuid-link** - Takes a UUID value (like a link to a compendium document) and references it like an object
 
 ### Column Properties
 
@@ -340,7 +353,7 @@ Returns the largest numeric value from the specified array or object.
 
 ### Object Loops
 
-**object-loop** - Loop through object properties with optional filtering:
+ - Loop through object properties with optional filtering:
 
 **Basic Example:**
 ```json
@@ -531,6 +544,34 @@ Multiple items with nested arrays:
 "text": "items{weapon} => {name}: {system.attack.damage.parts} => {dice}{bonus} | "
 ```
 Output: `Dagger: 1d4+1 | Staff: 1d6+0 | 1d8+2 |`
+
+### UUID Link
+
+**uuid-link** - This works the same as object loops, but will attempt to resolve any UUIDs from the initial property to the object that the UUID points to
+
+**Example:** This shows how to handle a UUID Link with nested data on the linked object
+The character object stores a UUID link to the class object
+```json
+{
+  "class": "Compendium.classes.Item.035nuVkU9q2wtMPs"
+}
+```
+
+That class stores the class name (and other possibly relevant information)
+```json
+{
+  "name": "Wizard",
+  "hitpoints": "d4",
+  "spellcasting": {
+    "ability": "Int"
+  }
+}
+```
+Template:
+```json
+"text": "system.class => {name} {hitpoints} ({spellcasting.ability})"
+```
+Output: `Wizard d4 Int`
 
 ### Table Layout Control
 
